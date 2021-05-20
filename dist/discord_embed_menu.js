@@ -30,13 +30,20 @@ class DiscordEmbedMenu extends events_1.EventEmitter {
             if (this.channel.client.user) {
                 let missingPerms = [];
                 let clientPermissions = this.channel.permissionsFor(this.channel.client.user);
-                DiscordEmbedMenu.REQUIRED_PERMS.forEach((permission) => {
-                    if (!clientPermissions || clientPermissions.has(permission)) {
-                        missingPerms.push(permission);
+                if (clientPermissions) {
+                    if (!clientPermissions.has('ADMINISTRATOR')) {
+                        DiscordEmbedMenu.REQUIRED_PERMS.forEach((permission) => {
+                            if (!clientPermissions || clientPermissions.has(permission)) {
+                                missingPerms.push(permission);
+                            }
+                        });
                     }
-                });
-                if (missingPerms.length > 0) {
-                    console.log(`\x1B[96m[discord.js-embed-menu]\x1B[0m Looks like you're missing ${missingPerms.join(', ')} in #${this.channel.name} (${this.channel.guild.name}). This perms are needed for basic menu operation. You'll probably experience problems sending menus in this channel.`);
+                    if (missingPerms.length > 0) {
+                        console.log(`\x1B[96m[discord.js-embed-menu]\x1B[0m Looks like you're missing ${missingPerms.join(', ')} in #${this.channel.name} (${this.channel.guild.name}). This perms are needed for basic menu operation. You'll probably experience problems sending menus in this channel.`);
+                    }
+                }
+                else {
+                    console.log('\x1B[96m[discord.js-embed-menu]\x1B[0m Something went wrong while checking BOT permissions.');
                 }
             }
             else {
