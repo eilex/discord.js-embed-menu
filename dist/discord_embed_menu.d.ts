@@ -25,7 +25,7 @@ export declare class DiscordEmbedMenu extends EventEmitter {
     stop(): Promise<void | Message>;
     delete(): Promise<void | Message>;
     private clearReactions;
-    setPage(page?: number): Promise<void>;
+    setPage(page?: number | string): Promise<void>;
     private addReactions;
     private stopReactions;
     private awaitReactions;

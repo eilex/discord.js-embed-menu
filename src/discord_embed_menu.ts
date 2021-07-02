@@ -103,7 +103,17 @@ export class DiscordEmbedMenu extends EventEmitter {
         }
     }
 
-    public async setPage(page: number = 0): Promise<void> {
+    public async setPage(page: number | string = 0): Promise<void> {
+
+        if (typeof(page) === 'string') {
+            let pageIndex = this.pages.findIndex(p => p.name === page);
+            if (pageIndex != -1) {
+                page = pageIndex;
+            } else {
+                throw new Error(`Page "${page}" not found!`);
+            }
+        }
+
         this.emit('page-changing', this.pageIndex, this.currentPage, page, this.pages[page]);
 
         this.pageIndex = page;

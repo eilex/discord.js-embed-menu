@@ -1,7 +1,7 @@
 {
   "name": "discord.js-embed-menu",
   "description": "Easily create Discord.js embed menus with reactions and unlimited customisable pages.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "eilex",
   "license": "MIT",
   "main": "dist/main.js",

@@ -79,6 +79,15 @@ class DiscordEmbedMenu extends events_1.EventEmitter {
         }
     }
     async setPage(page = 0) {
+        if (typeof (page) === 'string') {
+            let pageIndex = this.pages.findIndex(p => p.name === page);
+            if (pageIndex != -1) {
+                page = pageIndex;
+            }
+            else {
+                throw new Error(`Page "${page}" not found!`);
+            }
+        }
         this.emit('page-changing', this.pageIndex, this.currentPage, page, this.pages[page]);
         this.pageIndex = page;
         this.currentPage = this.pages[this.pageIndex];
