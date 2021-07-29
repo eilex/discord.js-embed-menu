@@ -207,6 +207,9 @@ export class DiscordEmbedMenu extends EventEmitter {
     
                 if (reactionName && this.menu) {
                     if (typeof this.currentPage.reactions[reactionName] === 'function') {
+                        // this this flag is not true then the clearReaction() at ligne 188 will be never call when try to change page
+                        // also test when no page change it works too
+                        reactionsChanged=true;
                         return this.currentPage.reactions[reactionName](this);
                     }
     
