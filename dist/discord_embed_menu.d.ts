@@ -13,6 +13,7 @@ export declare class DiscordEmbedMenu extends EventEmitter {
     mention: boolean;
     keepUserReactionOnStop: boolean;
     loadingMessage: string;
+    private reactionsChanged;
     private isDM;
     private userTag;
     currentPage: DiscordEmbedMenuPage;
