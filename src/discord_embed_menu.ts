@@ -82,11 +82,11 @@ export class DiscordEmbedMenu extends EventEmitter {
     public async stop(): Promise<void | Message> {
         this.stopReactions(false);
         if (this.menu && this.keepUserReactionOnStop) {
-            this.menu.reactions.cache.array().forEach(async (reaction: MessageReaction) => {
+            for (const reaction of this.menu.reactions.cache.array()) {
                 if (this.menu && this.menu.client && this.menu.client.user) {
                     await reaction.users.remove(this.menu.client.user.id);
                 }
-            });
+            }
         } else if (!this.isDM) {
             return await this.clearReactions();
         }
